@@ -22,24 +22,23 @@ module smash_fifo #(
 
 	always @(posedge i_clk) begin
 		if (i_rst) begin
-			read_ptr  <= 1'd0;//ADDR_SIZE'd0;
-			write_ptr <= 1'd0;//ADDR_SIZE'd0;
-			empty     <= 1'b1;
+			read_ptr  <= 'd0;
+			write_ptr <= 'd0;
+			empty     <= 'b1;
 		end else begin
 			if (i_write && !o_full) begin
 				if (i_read && !empty) begin
 					mem[write_ptr] <= i_data;
 				end else begin
-					write_ptr      <= write_ptr + 1'd1;//ADDR_SIZE'd1;
+					write_ptr      <= write_ptr + 'd1;
 					mem[write_ptr] <= i_data;
-					empty          <= 1'b0;
+					empty          <= 'b0;
 				end
 			end else if (i_read && !empty) begin
-				read_ptr <= read_ptr + 1'd1;//ADDR_SIZE'd1;
+				read_ptr <= read_ptr + 'd1;
 
-				//if ((read_ptr + ADDR_SIZE'd1) == write_ptr) begin
-				if ((read_ptr + 1'd1) == write_ptr) begin
-					empty <= 1'b1;
+				if ((read_ptr + 'd1) == write_ptr) begin
+					empty <= 'b1;
 				end
 			end
 		end
