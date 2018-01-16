@@ -23,11 +23,11 @@ module smash_fifo_tb;
 
     initial begin
         // Dump waves
-        $dumpfile("dump.vcd");
+        $dumpfile("smash_fifo.vcd");
         //$dumpvars(1, smash_fifo_tb);
         $dumpvars(0);
 
-        i_clk = 1'b0;
+        i_clk = 1'b1;
         i_rst = 1'b1;
         i_write = 1'b0;
         i_read = 1'b0;
